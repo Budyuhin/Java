@@ -1,53 +1,49 @@
-package ru.geekbrains.lesson2;
+package Lesson3;
+
+import java.util.Arrays;
 
 public class MainApp {
     public static void main(String[] args) {
-        sumCheck ();
-        Two (3);
-        checkTrueOrFalse(-7);
-        wordMuch();
-        // eachFourYaer ();
+          changeOneNull ();
+          OneHundred ();
+          changeSix();
+          doubleMassiv ();
     }
-    public static boolean sumCheck () {
-        int a = 5;
-        int b = 10;
-        int sum = a + b;
-        if (sum >= 10 && sum <= 20) {
-            return true;
-        } else {
-            return false;
+    public static void changeOneNull() {
+        int[] arr = {0,1,0,1,1,0,1,1,0,0};
+        for (int i = 0; i < arr.length; i++){
+            if (arr [i] <= 0) {
+                arr[i] = 0 + 1;
+            } else {
+                arr[i] = 0;
+            }
         }
+        System.out.println(Arrays.toString(arr));
     }
-    public static void Two (int j) {
-        if (j <= -1) {
-            System.out.println("Число отрицательное.");
-        } else {
-            System.out.println("Число положительное.");
+    public static void OneHundred() {
+        int[] arr = new int [100];
+        arr [0] = 1;
+        for(int i = 1; i < arr.length; i++) {
+            arr[i] = i +1;
         }
+        System.out.println(Arrays.toString(arr));
     }
-   public static boolean checkTrueOrFalse (int a) {
-       if (a <= 0) {
-           return true;
-       } else {
-           return false;
-       }
+    public static void changeSix() {
+        int[] arr = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] <= 6){
+                arr [i] = arr [i] * 2;
+            }
+            }
+            System.out.println(Arrays.toString(arr));
+        }
+    public static void doubleMassiv() {
+        int[][] arr = new int[5][5];
+        for (int j = 0; j < arr.length; j++);
+        for (int i = 0; i < arr.length; i++) {
+           for (int j = 0; j < arr[i].length; j++) {
+                System.out.print(arr[i][j] + " ");
+            } System.out.println();
+        }
    }
-   public static void wordMuch () {
-        for (int i = 0; i < 5; i++) {
-            System.out.println("Строка");
-        }
-   }
-//   public static boolean eachFourYaer () {
-//       for (int i = 0; i < 400; i++) {
-//           for (int b = 0; b < 4; b++) {
-//               if (b > 4) {
-//                   return true;
-//               } else {
-//                   return false;
-//               }
-//           }
-//       }
-//   }
 }
-
-
