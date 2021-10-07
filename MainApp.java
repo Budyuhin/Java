@@ -1,49 +1,117 @@
-package Lesson3;
+package ru.geekbrains.lesson4;
 
-import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
 
 public class MainApp {
+    public static int SIZE = 4;
+    public static int DOTS_TO_WIN = 3;
+    public static final char DOT_EMPTY = '•';
+    public static final char DOT_X = 'X';
+    public static final char DOT_O = 'O';
+    public static char[][] map;
+    public static Scanner sc = new Scanner(System.in);
+    public static Random rand = new Random();
     public static void main(String[] args) {
-          changeOneNull ();
-          OneHundred ();
-          changeSix();
-          doubleMassiv ();
-    }
-    public static void changeOneNull() {
-        int[] arr = {0,1,0,1,1,0,1,1,0,0};
-        for (int i = 0; i < arr.length; i++){
-            if (arr [i] <= 0) {
-                arr[i] = 0 + 1;
-            } else {
-                arr[i] = 0;
+        initMap();
+        printMap();
+        while (true) {
+            humanTurn();
+            printMap();
+            if (checkWin(DOT_X)) {
+                System.out.println("Победил человек");
+                break;
+            }
+            if (isMapFull()) {
+                System.out.println("Ничья");
+                break;
+            }
+            aiTurn();
+            printMap();
+            if (checkWin(DOT_O)) {
+                System.out.println("Победил Искуственный Интеллект");
+                break;
+            }
+            if (isMapFull()) {
+                System.out.println("Ничья");
+                break;
             }
         }
-        System.out.println(Arrays.toString(arr));
+        System.out.println("Игра закончена");
     }
-    public static void OneHundred() {
-        int[] arr = new int [100];
-        arr [0] = 1;
-        for(int i = 1; i < arr.length; i++) {
-            arr[i] = i +1;
+    public static boolean checkWin(char symb) {
+        int x = DOTS_TO_WIN;
+        int y = DOTS_TO_WIN;
+        map = new char[SIZE][SIZE];
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                if (x < 0 || x >= SIZE) return true;
+            }
         }
-        System.out.println(Arrays.toString(arr));
+        return map[y][x] != DOTS_TO_WIN;
     }
-    public static void changeSix() {
-        int[] arr = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] <= 6){
-                arr [i] = arr [i] * 2;
+
+//        if(map[0][0] == symb && map[0][1] == symb && map[0][2] == symb) return true;
+//        if(map[1][0] == symb && map[1][1] == symb && map[1][2] == symb) return true;
+//        if (map[2][0] == symb && map[2][1] == symb && map[2][2] == symb) return true;
+//        if (map[0][0] == symb && map[1][0] == symb && map[2][0] == symb) return true;
+//        if (map[0][1] == symb && map[1][1] == symb && map[2][1] == symb) return true;
+//        if (map[0][2] == symb && map[1][2] == symb && map[2][2] == symb) return true;
+//        if (map[0][0] == symb && map[1][1] == symb && map[2][2] == symb) return true;
+//        if (map[2][0] == symb && map[1][1] == symb && map[0][2] == symb) return true;
+//        return false;
+//    }
+    public static boolean isMapFull() {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                if (map[i][j] == DOT_EMPTY) return false;
             }
+        }
+        return true;
+    }
+    public static void aiTurn() {
+        int x, y;
+        do {
+            x = rand.nextInt(SIZE);
+            y = rand.nextInt(SIZE);
+        } while (isCellValid(x, y));
+        System.out.println("Компьютер походил в точку " + (x + 1) + " " + (y + 1));
+        map[y][x] = DOT_O;
+    }
+    public static void humanTurn() {
+        int x, y;
+        do {
+            System.out.println("Введите координаты в формате X Y");
+            x = sc.nextInt() - 1;
+            y = sc.nextInt() - 1;
+        } while (isCellValid(x, y)); // while(isCellValid(x, y) == false)
+        map[y][x] = DOT_X;
+    }
+    public static boolean isCellValid(int x, int y) {
+        if (x < 0 || x >= SIZE || y < 0 || y >= SIZE) return true;
+        return map[y][x] != DOT_EMPTY;
+    }
+    public static void initMap() {
+        map = new char[SIZE][SIZE];
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                map[i][j] = DOT_EMPTY;
             }
-            System.out.println(Arrays.toString(arr));
         }
-    public static void doubleMassiv() {
-        int[][] arr = new int[5][5];
-        for (int j = 0; j < arr.length; j++);
-        for (int i = 0; i < arr.length; i++) {
-           for (int j = 0; j < arr[i].length; j++) {
-                System.out.print(arr[i][j] + " ");
-            } System.out.println();
+    }
+    public static void printMap() {
+        for (int i = 0; i <= SIZE; i++) {
+            System.out.print(i + " ");
         }
-   }
+        System.out.println();
+        for (int i = 0; i < SIZE; i++) {
+            System.out.print((i + 1) + " ");
+            for (int j = 0; j < SIZE; j++) {
+                System.out.print(map[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
 }
+
