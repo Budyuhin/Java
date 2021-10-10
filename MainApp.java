@@ -1,49 +1,31 @@
-package Lesson3;
-
-import java.util.Arrays;
+package ru.geekbrains.lesson5;
 
 public class MainApp {
     public static void main(String[] args) {
-          changeOneNull ();
-          OneHundred ();
-          changeSix();
-          doubleMassiv ();
+        staffcompany Boss = new staffcompany();
+        Boss.name = "Иванов И.И.";
+        Boss.post = "Босс";
+        Boss.cash = 1000;
+        Boss.phone = 112211;
+        Boss.email = "ivan@gmail.ru";
+        Boss.age = 41;
+
+        staffcompany Slave = new staffcompany();
+        Slave.name = "Петров П.П.";
+        Slave.post = "Подчиненный";
+        Slave.cash = 800;
+        Slave.phone = 221122;
+        Slave.email = "petro@gmail.ru";
+        Slave.age = 31;
+
+        Boss.info();
+        Slave.info();
+
+        staffcompany [] staff = new staffcompany [5];
+        staff[0] = new staffcompany ("Иванов И.И.", "Босс", "ivan@gmail.ru", 112211, 1000, 41);
+        staff[1] = new staffcompany ("Петров П.П.", "Подчиненный", "petro@gmail.ru", 221122, 800, 31);
+        staff[2] = new staffcompany ("Дроздов Д.Д.", "Подчиненный", "drozd@gmail.ru", 222111, 800, 30);
+        staff[3] = new staffcompany ("Сидоров С.С.", "Подчиненный", "sidor@gmail.ru", 111222, 850, 42);
+        staff[4] = new staffcompany ("Козлов Д.В.", "Подчиненный", "kozlov@gmail.ru", 111111, 830, 40);
     }
-    public static void changeOneNull() {
-        int[] arr = {0,1,0,1,1,0,1,1,0,0};
-        for (int i = 0; i < arr.length; i++){
-            if (arr [i] <= 0) {
-                arr[i] = 0 + 1;
-            } else {
-                arr[i] = 0;
-            }
-        }
-        System.out.println(Arrays.toString(arr));
-    }
-    public static void OneHundred() {
-        int[] arr = new int [100];
-        arr [0] = 1;
-        for(int i = 1; i < arr.length; i++) {
-            arr[i] = i +1;
-        }
-        System.out.println(Arrays.toString(arr));
-    }
-    public static void changeSix() {
-        int[] arr = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] <= 6){
-                arr [i] = arr [i] * 2;
-            }
-            }
-            System.out.println(Arrays.toString(arr));
-        }
-    public static void doubleMassiv() {
-        int[][] arr = new int[5][5];
-        for (int j = 0; j < arr.length; j++);
-        for (int i = 0; i < arr.length; i++) {
-           for (int j = 0; j < arr[i].length; j++) {
-                System.out.print(arr[i][j] + " ");
-            } System.out.println();
-        }
-   }
 }
